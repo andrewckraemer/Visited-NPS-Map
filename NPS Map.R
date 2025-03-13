@@ -9,12 +9,12 @@ library("operator.tools")   # not-in function
 library('tigris')
 
 #states
-states <- read_sf("/Users/minerva/Library/Mobile Documents/com~apple~CloudDocs/Git/Visited: NPS Map/usa.shp")
+states <- read_sf("/Users/minerva/Visited: NPS Map/usa.shp")
 territories <- c("AS", "GU", "MP", "PR", "VI")
 
 ## load and process nps data
 # https://public-nps.opendata.arcgis.com/datasets/nps::nps-boundary-4/explore
-nps2 <- read_sf("/Users/minerva/Library/Mobile Documents/com~apple~CloudDocs/Git/Visited: NPS Map/nps_boundary.shp")  %>% 
+nps2 <- read_sf("/Users/minerva/Visited: NPS Map/nps_boundary.shp")  %>% 
   select(STATE, PARKNAME, AreaID, geometry) %>% 
   filter(STATE %!in% territories) %>%  
   mutate(visited = case_when(PARKNAME == "Hot Springs" ~ "#eb0c99", 
@@ -101,7 +101,7 @@ nps <- nps2[nps2$PARKNAME %in% allparks, ]
 map <- leaflet() %>%
   addPolygons(data = states,
               smoothFactor = 0.2,
-              fillColor = "snow",
+              fillColor = "#6f90d9",
               fillOpacity = 0.5,
               stroke = TRUE,
               weight = 0.5,
